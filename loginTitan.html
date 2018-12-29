@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Keerttik Titan</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style>
+        h1{
+        color: rgb(230, 6, 6);
+        margin-left: 15%;
+        font-family: Arial, Helvetica, sans-serif;
+        }
+        #btnSubmit {
+        background-color: #ddd;
+        border: none;
+        color: black;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        margin-left: 120px;
+        cursor: pointer;
+        border-radius: 16px;
+        }
+        input {
+        margin: 5px;
+        margin-left: 100px;
+        width: 300px;
+        padding: 12px 20px;
+        }
+
+    </style>
+  
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script type="text/javascript">
+    
+        $(document).ready(function(){
+            $("#btnSubmit").click(function(){
+                
+
+                var curEmail = $('#emailLog').val();
+                var curPassword = $('#passwordLog').val();
+                var myData = retriveData("storedItem");
+
+
+                function retriveData(key){
+
+					    var retrivedData = localStorage.getItem(key);
+					    var parsedObj = JSON.parse(retrivedData);
+					    console.log(parsedObj);
+
+                        var emailId = JSON.email;
+                        var pass = JSON.password ; 
+                        
+                         if(emailId == curEmail && pass == curPassword){
+                            printTable(JSON);
+                         }
+				}    
+
+
+                function printTable(json) {
+						var htmlData = "<table id = 'named'>";
+						htmlData +=
+                        "<tr><th onclick='sortTable(0)'>First Name</th><th onclick='sortTable(1)'>Last Name</th></tr>";
+						for (var i = 0; i < json.length; i++) {
+							htmlData +=
+                            `<tr><td>${json[i].firstName}</td><td>${json[i].lastName}</td></tr>`;						}
+						htmlData += "</table>";
+						$("#tableElement").html("");
+						$("#tableElement").append(htmlData);
+					}
+
+                
+
+            });
+        });
+        
+    </script>
+</head>
+<body>
+    <h1>LOGIN HERE</h1>
+    <input type="email" name="" id="emailLog" required placeholder="email" />
+    <span id="emailfeed"></span>
+    <br>
+    <input type="password" name="" id="passwordLog" placeholder="Password" />
+    <span id="pasfeed"></span>
+    <br>
+    <input type="button" name="" value="Submit" id="btnSubmit">
+</body>
+</html>
