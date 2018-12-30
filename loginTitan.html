@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Keerttik Titan</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style>
+
+        body{
+            background-image: url("https://images.pexels.com/photos/301378/pexels-photo-301378.jpeg?cs=srgb&dl=background-board-carpentry-301378.jpg&fm=jpg");
+            background-size: cover;
+            
+            background-position: center;
+        }
+
+        h1{
+        color: rgb(248, 245, 245);
+        margin-left: 45%;
+        font-family: Arial, Helvetica, sans-serif;
+        }
+        #btnSubmit {
+        background-color: #ddd;
+        border: none;
+        color: black;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        margin-left: 40%;
+        cursor: pointer;
+        border-radius: 16px;
+        }
+        input {
+        margin: 5px;
+        margin-left: 38%;
+        width: 300px;
+        padding: 12px 20px;
+        }
+
+
+
+        table {
+		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+		margin-top: 50px;
+	}
+
+    #cgi{
+        width: 30%;
+        margin-left: 40%;
+        
+        padding: 20px;
+    }
+	#named td,
+	#named th {
+		border: 1px solid #ddd;
+		padding: 8px;
+	}
+
+	#named tr:nth-child(even) {
+		background-color: #f2f2f2;
+	}
+
+	#named tr:hover {
+		background-color: #ddd;
+	}
+
+	#named th {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		text-align: left;
+		background-color: rgb(36, 37, 36);
+		color: white;
+	}
+
+    </style>
+  
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script type="text/javascript">
+    
+        $(document).ready(function(){
+            
+            $("#btnSubmit").click(function(){
+                
+                var json;
+                var curEmail = $('#emailLog').val();
+                var curPassword = $('#passwordLog').val();
+                var myData = retriveData("storedItem");
+
+
+                function retriveData(key){
+
+					    var retrivedData = localStorage.getItem(key);
+					     json = JSON.parse(retrivedData);
+					    console.log(json);
+                        
+                        var last = json.length-1;
+
+                        console.log(last);
+
+                        // console.log(json[last].email);
+                        // console.log(json[last].password);
+                        
+                        
+                        var emailId = json[last].email;
+                        var pass = json[last].password ; 
+                        // console.log(curEmail);
+                        // console.log(curPassword);
+                        // console.log("hello");
+                        console.log(emailId);
+                        console.log(pass);
+
+                        if(curEmail == emailId && curPassword == pass){
+                            alert('login successful');
+                          window.open("table.html");
+                          console.table(json);
+                            printTable(json);
+                        }else{
+                            alert(" wrong email or password");
+                        }
+				}    
+
+
+                function printTable(json) {
+						var htmlData = "<table id = 'named'>";
+						htmlData +=
+							"<tr><th onclick='sortTable(0)'>First Name</th><th onclick='sortTable(1)'>Last Name</th></tr>";
+						for (var i = 0; i < json.length; i++) {
+							htmlData +=
+								`<tr><td>${json[i].firstName}</td><td>${json[i].lastName}</td></tr>`;
+						}
+						htmlData += "</table>";
+						$("#tableElement").html("");
+						$("#tableElement").append(htmlData);
+					}               
+
+            });
+        });
+        
+    </script>
+</head>
+<body>
+
+
+    <h1>LOGIN HERE</h1>
+
+    <form action="">
+        <input type="email" name="" id="emailLog" required placeholder="email" />
+        <span id="emailfeed"></span>
+        <br>
+        <input type="password" name="" id="passwordLog" placeholder="Password" />
+        <span id="pasfeed"></span>
+        <br>
+        <input type="button" name="" value="Submit" id="btnSubmit">
+
+
+        <img src="https://pngimage.net/wp-content/uploads/2018/05/cgi-logo-png-5.png" alt="" id="cgi">
+    </form>
+</body>
+
+</html>
