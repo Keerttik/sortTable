@@ -1,24 +1,179 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>titan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <script src=""></script>
 
     <style>
-     #i{
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        padding-left: 20%;
-        padding-top: 13%;
+        table {
+		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+		margin-top: 50px;
+	}
+
+    
+
+    #search {
+        background-image: url("https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png");
+        padding-left: 17px;
+		border: 2px solid rgb(204, 29, 6);
+		margin-left: 80%;
+		border-radius: 5px;
+		padding: 12px 20px;
+		/* background-position: 10px 12px; Position the search icon */
+		background-repeat: no-repeat;
+		
+	}
+
+
+    #cgi{
+        width: 20%;
+        margin-left: 40%;
+        
+        padding: 10px;
     }
+
+    h1{
+        color: red;
+        font-family: "Times New Roman", Times, serif;
+
+    }
+	#named td,
+	#named th {
+		border: 1px solid #ddd;
+		padding: 8px;
+	}
+	#named tr:nth-child(even) {
+		background-color: #f2f2f2;
+	}
+	#named tr:hover {
+		background-color: #ddd;
+	}
+	#named th {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		text-align: left;
+		background-color: rgb(36, 37, 36);
+		color: white;
+	}
     </style>
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script type="text/javascript">
+        var details = JSON.parse(localStorage.getItem('storedItem'));
+
+        $(document).ready(function () {
+
+            printTable(details);
+
+            function printTable(json) {
+                var htmlData = "<table id = 'named'>";
+                htmlData +=
+                "<tr><th onclick='sortTable(0)'>First Name</th><th onclick='sortTable(1)'>Last Name</th><th>Email</th><th>phone number</th><th>Date of birth</th></tr>";                for (var i = 0; i < json.length; i++) {
+                    htmlData +=
+                        `<tr><td>${json[i].firstName}</td><td>${json[i].lastName}</td><td>${json[i].email}</td><td>${json[i].contact}</td><td>${json[i].dob}</td></tr>`;
+                }
+                htmlData += "</table>";
+                $("#tableElement").html("");
+                $("#tableElement").append(htmlData);
+            }
+
+
+        $("#search").on("keyup", function () {
+				var value = $(this).val();
+
+				$("table tr").each(function (index) {
+					if (index !== 0) {
+
+						$row = $(this);
+
+						var id = $row.find("td:first").text().toLowerCase();
+
+						if (id.indexOf(value) !== 0) {
+							$row.hide();
+						}
+						else {
+							$row.show();
+						}
+					}
+				});
+			});
+        });
+
+
+        
+				
+        function sortTable(n) {
+			var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+			table = document.getElementById("named");
+			switching = true;
+			//Set the sorting direction to ascending:
+			dir = "asc";
+			/*Make a loop that will continue until
+			no switching has been done:*/
+			while (switching) {
+				//start by saying: no switching is done:
+				switching = false;
+				rows = table.rows;
+				/*Loop through all table rows (except the
+				first, which contains table headers):*/
+				for (i = 1; i < (rows.length - 1); i++) {
+					//start by saying there should be no switching:
+					shouldSwitch = false;
+					/*Get the two elements you want to compare,
+					one from current row and one from the next:*/
+					x = rows[i].getElementsByTagName("TD")[n];
+					y = rows[i + 1].getElementsByTagName("TD")[n];
+					/*check if the two rows should switch place,
+					based on the direction, asc or desc:*/
+					if (dir == "asc") {
+						if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+							//if so, mark as a switch and break the loop:
+							shouldSwitch = true;
+							break;
+						}
+					} else if (dir == "desc") {
+						if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+							//if so, mark as a switch and break the loop:
+							shouldSwitch = true;
+							break;
+						}
+					}
+				}
+				if (shouldSwitch) {
+					/*If a switch has been marked, make the switch
+					and mark that a switch has been done:*/
+					rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+					switching = true;
+					//Each time a switch is done, increase this count by 1:
+					switchcount++;
+				} else {
+					/*If no switching has been done AND the direction is "asc",
+					set the direction to "desc" and run the while loop again.*/
+					if (switchcount == 0 && dir == "asc") {
+						dir = "desc";
+						switching = true;
+					}
+				}
+			}
+		}
+    </script>
+
 </head>
+
 <body>
-    <img id="i" src="https://happynewyear2019h.com/wp-content/uploads/2018/08/Happy-New-Year-2019-HD-Wallpaper-3.jpg" alt="">
+    <div class="form-style-10">
+        
+        <img src="https://pngimage.net/wp-content/uploads/2018/05/cgi-logo-png-5.png" alt="" id="cgi">
+        <h1>Logged In users</h1>
+        <input type="text" id="search" placeholder="Search by First Name here">  
+
+        <div id="tableElement"></div>
+
+
 </body>
+
 </html>
