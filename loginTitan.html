@@ -14,19 +14,98 @@
     
     <style>
 
-        body{
-            background-image: url("https://images.pexels.com/photos/301378/pexels-photo-301378.jpeg?cs=srgb&dl=background-board-carpentry-301378.jpg&fm=jpg");
-            background-size: cover;
-            
-            background-position: center;
-        }
+body {
+  background: #2d343d;
+}
 
+.login {
+  margin: 20px auto;
+  width: 300px;
+  padding: 30px 25px;
+  background: white;
+  border: 1px solid #c4c4c4;
+}
+
+h1.login-title {
+  margin: -28px -25px 25px;
+  padding: 15px 25px;
+  line-height: 30px;
+  font-size: 25px;
+  font-weight: 300;
+  color: #ADADAD;
+  text-align:center;
+  background: #f7f7f7;
+ 
+}
+
+.login-input {
+  width: 285px;
+  height: 50px;
+  margin-bottom: 25px;
+  padding-left:10px;
+  font-size: 15px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.login-input:focus {
+    border-color:#6e8095;
+    outline: none;
+  }
+.login-button {
+  width: 100%;
+  height: 50px;
+  padding: 0;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  background: #f0776c;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer; 
+  outline:0;
+}
+
+.login-lost
+{
+  text-align:center;
+  margin-bottom:0px;
+}
+
+.login-lost a
+{
+  color:#666;
+  text-decoration:none;
+  font-size:13px;
+}
+
+#cgi{
+        width: 50%;
+        margin-left: 20%;
+        
+        padding: 20px;
+    }
+
+
+
+/* 
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+.btn { display: inline-block; *display: inline; *zoom: 1; padding: 4px 10px 4px; margin-bottom: 0; font-size: 13px; line-height: 18px; color: #333333; text-align: center;text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); vertical-align: middle; background-color: #f5f5f5; background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6); background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6)); background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); background-image: -o-linear-gradient(top, #ffffff, #e6e6e6); background-image: linear-gradient(top, #ffffff, #e6e6e6); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#ffffff, endColorstr=#e6e6e6, GradientType=0); border-color: #e6e6e6 #e6e6e6 #e6e6e6; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); border: 1px solid #e6e6e6; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); cursor: pointer; *margin-left: .3em; }
+.btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled] { background-color: #e6e6e6; }
+.btn-large { padding: 9px 14px; font-size: 15px; line-height: normal; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
+.btn:hover { color: #333333; text-decoration: none; background-color: #e6e6e6; background-position: 0 -15px; -webkit-transition: background-position 0.1s linear; -moz-transition: background-position 0.1s linear; -ms-transition: background-position 0.1s linear; -o-transition: background-position 0.1s linear; transition: background-position 0.1s linear; }
+.btn-primary, .btn-primary:hover { text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); color: #ffffff; }
+.btn-primary.active { color: rgba(255, 255, 255, 0.75); }
+.btn-primary { background-color: #4a77d4; background-image: -moz-linear-gradient(top, #6eb6de, #4a77d4); background-image: -ms-linear-gradient(top, #6eb6de, #4a77d4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6eb6de), to(#4a77d4)); background-image: -webkit-linear-gradient(top, #6eb6de, #4a77d4); background-image: -o-linear-gradient(top, #6eb6de, #4a77d4); background-image: linear-gradient(top, #6eb6de, #4a77d4); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#6eb6de, endColorstr=#4a77d4, GradientType=0);  border: 1px solid #3762bc; text-shadow: 1px 1px 1px rgba(0,0,0,0.4); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5); }
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] { filter: none; background-color: #4a77d4; }
+.btn-block { margin-left: 40%; width: 20%; display:block; }
+       
         h1{
-        color: rgb(248, 245, 245);
-        margin-left: 45%;
+        color: rgb(211, 11, 11);
+        margin-left: 43%;
         font-family: Arial, Helvetica, sans-serif;
         }
-        #btnSubmit {
+        /* #btnSubmit {
         background-color: #ddd;
         border: none;
         color: black;
@@ -38,8 +117,8 @@
         margin-left: 40%;
         cursor: pointer;
         border-radius: 16px;
-        }
-        input {
+        } */
+        /* input {
         margin: 5px;
         margin-left: 38%;
         width: 300px;
@@ -81,7 +160,7 @@
 		text-align: left;
 		background-color: rgb(36, 37, 36);
 		color: white;
-	}
+	} */
 
     </style>
   
@@ -108,9 +187,7 @@
 
                         console.log(last);
 
-                        // console.log(json[last].email);
-                        // console.log(json[last].password);
-                        
+                                              
                         
                         var emailId = json[last].email;
                         var pass = json[last].password ; 
@@ -121,28 +198,28 @@
                         console.log(pass);
 
                         if(curEmail == emailId && curPassword == pass){
-                            alert('login successful');
+                           // alert('login successful');
                           window.open("table.html");
                           console.table(json);
-                            printTable(json);
+                       //     printTable(json);
                         }else{
                             alert(" wrong email or password");
                         }
 				}    
 
 
-                function printTable(json) {
-						var htmlData = "<table id = 'named'>";
-						htmlData +=
-							"<tr><th onclick='sortTable(0)'>First Name</th><th onclick='sortTable(1)'>Last Name</th></tr>";
-						for (var i = 0; i < json.length; i++) {
-							htmlData +=
-								`<tr><td>${json[i].firstName}</td><td>${json[i].lastName}</td></tr>`;
-						}
-						htmlData += "</table>";
-						$("#tableElement").html("");
-						$("#tableElement").append(htmlData);
-					}               
+                // function printTable(json) {
+				// 		var htmlData = "<table id = 'named'>";
+				// 		htmlData +=
+				// 			"<tr><th onclick='sortTable(0)'>First Name</th><th onclick='sortTable(1)'>Last Name</th></tr>";
+				// 		for (var i = 0; i < json.length; i++) {
+				// 			htmlData +=
+				// 				`<tr><td>${json[i].firstName}</td><td>${json[i].lastName}</td></tr>`;
+				// 		}
+				// 		htmlData += "</table>";
+				// 		$("#tableElement").html("");
+				// 		$("#tableElement").append(htmlData);
+				// 	}               
 
             });
         });
@@ -151,7 +228,7 @@
 </head>
 <body>
 
-
+<!-- 
     <h1>LOGIN HERE</h1>
 
     <form action="">
@@ -161,11 +238,279 @@
         <input type="password" name="" id="passwordLog" placeholder="Password" />
         <span id="pasfeed"></span>
         <br>
-        <input type="button" name="" value="Submit" id="btnSubmit">
+        <input type="button" name="" value="Submit" id="btnSubmit" class="btn btn-primary btn-block btn-large">
 
 
         <img src="https://pngimage.net/wp-content/uploads/2018/05/cgi-logo-png-5.png" alt="" id="cgi">
-    </form>
+    </form> -->
+
+    <form class="login">
+            <img src="https://pngimage.net/wp-content/uploads/2018/05/cgi-logo-png-5.png" alt="" id="cgi">
+            <!-- <h1 class="login-title">Simple Login</h1> -->
+            <input type="email" class="login-input" placeholder="Email Adress" id="emailLog" autofocus>
+            <input type="password" class="login-input" id="passwordLog" placeholder="Password">
+            <input type="button" value="Lets Go" id="btnSubmit" class="login-button">
+          <!-- <p class="login-lost"><a href="">Forgot Password?</a></p> -->
+          </form>
+        
+</body>
+
+</html>
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Keerttik Titan</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style>
+
+body {
+  background: #2d343d;
+}
+
+.login {
+  margin: 20px auto;
+  width: 300px;
+  padding: 30px 25px;
+  background: white;
+  border: 1px solid #c4c4c4;
+}
+
+h1.login-title {
+  margin: -28px -25px 25px;
+  padding: 15px 25px;
+  line-height: 30px;
+  font-size: 25px;
+  font-weight: 300;
+  color: #ADADAD;
+  text-align:center;
+  background: #f7f7f7;
+ 
+}
+
+.login-input {
+  width: 285px;
+  height: 50px;
+  margin-bottom: 25px;
+  padding-left:10px;
+  font-size: 15px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.login-input:focus {
+    border-color:#6e8095;
+    outline: none;
+  }
+.login-button {
+  width: 100%;
+  height: 50px;
+  padding: 0;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  background: #f0776c;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer; 
+  outline:0;
+}
+
+.login-lost
+{
+  text-align:center;
+  margin-bottom:0px;
+}
+
+.login-lost a
+{
+  color:#666;
+  text-decoration:none;
+  font-size:13px;
+}
+
+#cgi{
+        width: 50%;
+        margin-left: 20%;
+        
+        padding: 20px;
+    }
+
+
+
+/* 
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+.btn { display: inline-block; *display: inline; *zoom: 1; padding: 4px 10px 4px; margin-bottom: 0; font-size: 13px; line-height: 18px; color: #333333; text-align: center;text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); vertical-align: middle; background-color: #f5f5f5; background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6); background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6)); background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); background-image: -o-linear-gradient(top, #ffffff, #e6e6e6); background-image: linear-gradient(top, #ffffff, #e6e6e6); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#ffffff, endColorstr=#e6e6e6, GradientType=0); border-color: #e6e6e6 #e6e6e6 #e6e6e6; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); border: 1px solid #e6e6e6; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); cursor: pointer; *margin-left: .3em; }
+.btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled] { background-color: #e6e6e6; }
+.btn-large { padding: 9px 14px; font-size: 15px; line-height: normal; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
+.btn:hover { color: #333333; text-decoration: none; background-color: #e6e6e6; background-position: 0 -15px; -webkit-transition: background-position 0.1s linear; -moz-transition: background-position 0.1s linear; -ms-transition: background-position 0.1s linear; -o-transition: background-position 0.1s linear; transition: background-position 0.1s linear; }
+.btn-primary, .btn-primary:hover { text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); color: #ffffff; }
+.btn-primary.active { color: rgba(255, 255, 255, 0.75); }
+.btn-primary { background-color: #4a77d4; background-image: -moz-linear-gradient(top, #6eb6de, #4a77d4); background-image: -ms-linear-gradient(top, #6eb6de, #4a77d4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6eb6de), to(#4a77d4)); background-image: -webkit-linear-gradient(top, #6eb6de, #4a77d4); background-image: -o-linear-gradient(top, #6eb6de, #4a77d4); background-image: linear-gradient(top, #6eb6de, #4a77d4); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#6eb6de, endColorstr=#4a77d4, GradientType=0);  border: 1px solid #3762bc; text-shadow: 1px 1px 1px rgba(0,0,0,0.4); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5); }
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] { filter: none; background-color: #4a77d4; }
+.btn-block { margin-left: 40%; width: 20%; display:block; }
+       
+        h1{
+        color: rgb(211, 11, 11);
+        margin-left: 43%;
+        font-family: Arial, Helvetica, sans-serif;
+        }
+        /* #btnSubmit {
+        background-color: #ddd;
+        border: none;
+        color: black;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        margin-left: 40%;
+        cursor: pointer;
+        border-radius: 16px;
+        } */
+        /* input {
+        margin: 5px;
+        margin-left: 38%;
+        width: 300px;
+        padding: 12px 20px;
+        }
+
+
+
+        table {
+		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+		margin-top: 50px;
+	}
+
+    #cgi{
+        width: 30%;
+        margin-left: 40%;
+        
+        padding: 20px;
+    }
+	#named td,
+	#named th {
+		border: 1px solid #ddd;
+		padding: 8px;
+	}
+
+	#named tr:nth-child(even) {
+		background-color: #f2f2f2;
+	}
+
+	#named tr:hover {
+		background-color: #ddd;
+	}
+
+	#named th {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		text-align: left;
+		background-color: rgb(36, 37, 36);
+		color: white;
+	} */
+
+    </style>
+  
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script type="text/javascript">
+    
+        $(document).ready(function(){
+            
+            $("#btnSubmit").click(function(){
+                
+                var json;
+                var curEmail = $('#emailLog').val();
+                var curPassword = $('#passwordLog').val();
+                var myData = retriveData("storedItem");
+
+
+                function retriveData(key){
+
+					    var retrivedData = localStorage.getItem(key);
+					     json = JSON.parse(retrivedData);
+					    console.log(json);
+                        
+                        var last = json.length-1;
+
+                        console.log(last);
+
+                                              
+                        
+                        var emailId = json[last].email;
+                        var pass = json[last].password ; 
+                        // console.log(curEmail);
+                        // console.log(curPassword);
+                        // console.log("hello");
+                        console.log(emailId);
+                        console.log(pass);
+
+                        if(curEmail == emailId && curPassword == pass){
+                           // alert('login successful');
+                          window.open("table.html");
+                          console.table(json);
+                       //     printTable(json);
+                        }else{
+                            alert(" wrong email or password");
+                        }
+				}    
+
+
+                // function printTable(json) {
+				// 		var htmlData = "<table id = 'named'>";
+				// 		htmlData +=
+				// 			"<tr><th onclick='sortTable(0)'>First Name</th><th onclick='sortTable(1)'>Last Name</th></tr>";
+				// 		for (var i = 0; i < json.length; i++) {
+				// 			htmlData +=
+				// 				`<tr><td>${json[i].firstName}</td><td>${json[i].lastName}</td></tr>`;
+				// 		}
+				// 		htmlData += "</table>";
+				// 		$("#tableElement").html("");
+				// 		$("#tableElement").append(htmlData);
+				// 	}               
+
+            });
+        });
+        
+    </script>
+</head>
+<body>
+
+<!-- 
+    <h1>LOGIN HERE</h1>
+
+    <form action="">
+        <input type="email" name="" id="emailLog" required placeholder="email" />
+        <span id="emailfeed"></span>
+        <br>
+        <input type="password" name="" id="passwordLog" placeholder="Password" />
+        <span id="pasfeed"></span>
+        <br>
+        <input type="button" name="" value="Submit" id="btnSubmit" class="btn btn-primary btn-block btn-large">
+
+
+        <img src="https://pngimage.net/wp-content/uploads/2018/05/cgi-logo-png-5.png" alt="" id="cgi">
+    </form> -->
+
+    <form class="login">
+            <img src="https://pngimage.net/wp-content/uploads/2018/05/cgi-logo-png-5.png" alt="" id="cgi">
+            <!-- <h1 class="login-title">Simple Login</h1> -->
+            <input type="email" class="login-input" placeholder="Email Adress" id="emailLog" autofocus>
+            <input type="password" class="login-input" id="passwordLog" placeholder="Password">
+            <input type="button" value="Lets Go" id="btnSubmit" class="login-button">
+          <!-- <p class="login-lost"><a href="">Forgot Password?</a></p> -->
+          </form>
+        
 </body>
 
 </html>
