@@ -13,32 +13,23 @@
 		width: 300px;
 		padding: 12px 20px;
 	}
-
 	span{
 		color: rgb(241, 12, 12);
 	}
-
-	input[type=text]:focus {
+	input:focus {
 		border: 3px solid rgb(151, 15, 15);
 		
 	}
-
-	#search {
-		border: 2px solid rgb(158, 22, 4);
-		margin-left: 40%;
-		border-radius: 5px;
-		padding: 12px 20px;
-		background-position: 10px 12px; /* Position the search icon */
-		background-repeat: no-repeat;
-		background-image: url("https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png");
+	#success{
+		width: 30px;
+		height: 30px;
 	}
 
 	h1 {
 		color: red;
 		margin-left: 220px;
 	}
-
-	#btnSubmit {
+	#btnSubmit , #login {
 		background-color: #ddd;
 		border: none;
 		color: black;
@@ -51,44 +42,39 @@
 		cursor: pointer;
 		border-radius: 16px;
 	}
-
 	#ano {
 		margin-right: 400px;
 		float: right;
 		clear: right;
 		width: 170px;
 		height: 170px;
-
 		border-radius: 50%;
 		margin-top: 50px;
 		margin-bottom: 20px;
 	}
-
 	#cgi {
 		margin-left: 100px;
 	}
-
 	table {
 		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 		border-collapse: collapse;
 		width: 100%;
 		margin-top: 50px;
 	}
-
+	span{
+		margin-left: 150px;
+	}
 	#named td,
 	#named th {
 		border: 1px solid #ddd;
 		padding: 8px;
 	}
-
 	#named tr:nth-child(even) {
 		background-color: #f2f2f2;
 	}
-
 	#named tr:hover {
 		background-color: #ddd;
 	}
-
 	#named th {
 		padding-top: 12px;
 		padding-bottom: 12px;
@@ -104,256 +90,264 @@
 		var editClick = false;
 		var position;
 		$(document).ready(function () {
+			$('#cgi').css("cursor", "pointer");
+			$('#cgi').animate({
+				width: "30%",
+				height: "30%"
+			}, 'slow');
+			setTimeout(function () {
+				$('#cgi').animate({
+					width: "20%"
+				}, 'slow');
+			}, 1000);
 
-			$('#cgi').css("cursor","pointer");
- 			$('#cgi').animate({width: "30%", height: "30%"}, 'slow');
+			$("#fName").focusout(function(){
+				validfName($("#fName").val());
 
-  			setTimeout(function() {
-    		$('#cgi').animate({width: "20%"}, 'slow');
-  			}, 1000 );
+			});
+			$("#lName").focusout(function(){
+				validlName($("#lName").val());
 
-					$("#btnSubmit").click(function () {
-						if (!editClick) {
-							validfName($("#fName").val());
-							validlName($("#lName").val());
-							validEmail($("#email").val());
-							validPass($("#password").val());
-							if ($("#fName").val().length > 0 && $("#lName").val().length > 0) {
+			});
+			$("#email").focusout(function(){
+				validEmail($("#email").val());
 
+			});
+			$("#password").focusout(function(){
+				validPass($("#password").val());
 
+			});
+			// $("#fName").focusin(function(){
+			// 	$("#fName").css({
+			// 			"box-shadow": " rgb(151, 15, 15); ",
+			// 			"border": "1px solid #600"
+			// 	});				
 
-								json.push(
-									{
-										"firstName": $("#fName").val(),
-										"lastName": $("#lName").val(),
-								 		"email": $("#email").val(),
-										"password": $("#password").val()
-									}
-								);
+			// });
 
-								localStorage.setItem('storedItem', storeData(json));
-								//storeData(json);
+			$("#btnSubmit").click(function () {
+				if (!editClick) {
+					validfName($("#fName").val());
+					validlName($("#lName").val());
+					validEmail($("#email").val());
+					validPass($("#password").val());
+					if ($("#fName").val().length >= 2 && $("#lName").val().length >= 2) {
+						json.push({
+							"firstName": $("#fName").val(),
+							"lastName": $("#lName").val(),
+							"dob": $("#dob").val(),
+							"email": $("#email").val(),
+							"password": $("#password").val(),
+							"contact": $("#phno").val()
+						});
+						localStorage.setItem('storedItem', storeData(json));
+						$('#success').attr('src',
+							'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAmVBMVEX///8AgAAAewAAegAAfQAAeADg8OAAgQAAgwDm8+bt9+3z+vP9//33/PcAhQAAdgAzlDPG4cbZ7NnR59Hi8OKZyJnv+O+LtosmjyY9mT1DnEM6lTpusm7A3sBQoVBcqFwWiRaTxJN3tnez1rODvIOizKJJnkmv1a8qjipkq2SMwYwnjCe317enzqd1tnXL48uix6KUx5RYnlhDivCfAAAH6ElEQVR4nO1dW1vqOhC1aVpuLSIoB1ARFREUdXv+/487gJ4tAm2TlWknw8d62U9bZ5nVJHPN2dkJJ5xwghNa/X4/5TaiPMT3s7ZWweTf+0tuU0rB5UKHOlhj9e+iwW0OPeJABT/Q+onbIGr05zr4hWjW5baJFgsV7EAHV9xGUeJqj+AK4fh4dpyePkBw/TW+cVtGhLRzmOHqazySTfXhkEa/oCZLbusI8Ji1ghulRjfiLzmXkzyGqw3n9YPbREeM8wmuN5x7bhudcBUWEFwv41jwhtOrFRNcLWNd7IbTGhZp9BvRVOiGM80+KI5DqbeGK7hR6uSC21x79AsOih2K54/cBlvjxmAf/cWxx22xJZ5tVnDD8DrhttkKRZeZA4hkORtj4310axG5jbbBk+VH+LWIgo6MbhsgGERy7jbpzPojXCP8w224MT7tP8I1lBiGvTpEUM4aZkdmChBJudZMkX10w7DJbboZbkF+Ys7DPqrRIBKSznhANao7MtzgJbqCgZIRdWvaX7i/ET5w226GG+ysXzv5MjRq7RT+hZIRxQCcwm9I0egdrNFBi9t2I0BO4dcSytBot33kGk3vUIJSNHp17Pso6hSuNDrltt0IyQjW6FyGRj/hfTQSolEouLaGkH20hWtUiM/0gl5mAi1DoxcoPyn7aGu39tB8BecyNAoH1wItw6+Hg2tB+MJtuxHw4Jq+lnHWv8MaDWTktZe4UyhDo83BsZ/1cHBNSu0FHlwLZdQkNuDgmp7J0Oh+n4ExhGgUdwo/uW03Ah4A1iMR9U/JAt5m6jK6gt7gjzCU0RMU12GNjmVoFKhc+0Y95jbeCA5JChn5eqxybQ015rbdCGlhq0gW9ESGRk1aRTKWUEadbIzyC9Qdt+1GSPEAcFtGlew9fFCoZ27bjYAn0tQNt+1GSEzbmfagBzI06hAAllHI/YEHLmRoNMU1OpFRIeug0Vtu241wgVdcyEj2pg4BYBkahSuAAyVDo7d44EKGRvcGzRhDd2Qk0nCNBjIKEm7xwIWQggS4ulIPZSQpbFuXtxjKKEhY4vuoDI3inRR6JEOjeCKtLiOR9hihBEMZibQmHLjQQxFJCryTIqgJSaThZ72MRFoDTlLosYx9FE5SBG0ZGn3C91EZibRLo3lWhyAkkYZrVLdlJNJwjZJOt0wbF8tlr1nC4RrjwbUFnRWN6VyHKwSjpz7dT/3CNR4AppvB+hSobzN02Ca+5l7BGo3IEmnJYtsITZv96OKZQjKNtsY7NyrK7zvBNUqWSOtf7w9aprsK3uOBC6pJLM1DEcyIqkS8e44SDN+JTMgILVBVweMBYKrO3jjLBJrYzwt7Ii1+zfwbU6QJeuxJitzyx8j5Q0jZkxTd/PBe6DpImj1J0S3KVYZuR+4H7hTSBIDj4gBteOdwEU/xAPCA5P4f1wwMCO9woeIarZHcjA1WcENxjH7yeLJXkZzFl9nHxM6vA0NdLeYkhUUnRziCHEbmJIVVFkghFJf4PkrRkda067sFKLok0ggIprYumxraUsQ1ShIA3nV4DShaViM948E1igDwA/Dr1dDG33ZIpFF0+7xBf1/dsaCIj3uiCAA3wF+uOsaRPeZun5yHd/KhTSnGeCKNopMigX+9MUWHbh+KAHAMR4ZMv0Vco5okAPyIO6Vmq8iepMDT6V8Ui/a6BJulvv7ZbZoKYDeGxat48JU7sx9NFAC+hW8b/1PM/Ra7eLKXqpOi78gwfxUTfJTOgKxKHU6UmFDkDwCfoZe2X8bMs4Sa8RKjAciSFGcu0YUfihmr6NDtM6CsCvpwJZh5aODdPjXaKnV8LFM+RfxPp6grgPF71Q/FwR7FxKdxT/ixvEVxN9rgkKQooQIYTz1nUnToSCtlJBm+KWxR3BaqQ7dPSVXqDpo6SBF2rMurUieh+FeoeCcFYdnHLvD+lX2Kdg8V/voRs/Kq1JM7OqHiY/NqZVZXJnj1/BbF9SrmvrqcC1VuBXBKsopdl7F5ZY8pac1IKDq8m1J6BXBrREBxAv/XKkbptPBxW+6oZpQOI8WqRkD0h1wUyaori9BkoljhKJ3mjIMiYXCtGA2OVVSVjtJpDCqnWPW4pwYcJQNR/ds+lQu1+hEQDTgej4A8uGaCSzhUZg/aALA5xepWkWuWelwVxXKCa0YUqxEq5wiIzOYLUrCOgKhCqMzt9eVT1DNWghV8i6UG18wolruKJQfX+CmWHlwzQolC1W261mUXlEeRrnXZEWUJ1aM51eVQ9Gq+aimehl8zgEu4wCnCqiAKkAvVv0eJ4w5tYMPDh7MbpBS9nK9KGYHz9BE4ygicp7MryYTq70OFRBR1h5tINhojEoo+z1yj+BY9nwvoLlTvH9hyXsWaH05hDhwpRgIeL3LabrSIuYDNIV53U/fIKcwBnusPq6q4cAVKUcjjRWtgRSm67ZtTmIMmst2cy3h04xuAUL10CnOwN32wCFIe3fiBbT2q8tQpzIFdJaO/TmEOWhaF03rObS0Ei9pw5bNTmANjipHfTmEOkoURRRkX7sNI3o0osmezXWDQUHQuwCnMQ2FbmEeZQhAF/YteZQpB5M8WCEVduDOQ9+i0tAt3Bh6DrLwNU/koPS4yHlHTddEHxTa680NKDa+9D4+ao7WIdpdRn089D3Bb4mOk1BZJHY5lvB9mg970NQrVBmE0PoZTYh9p/PbPBvfHt34nnHACgv8AVLuLtBCcxk0AAAAASUVORK5CYII='
+						);
+						//storeData(json);
+						//loginPage();
+						//printTable(json);
+					}
+				} else {
+					if (position != undefined) {
+						json[position].firstName = $("#fName").val();
+						json[position].lastName = $("#lName").val();
+						//	printTable(json);
+					}
+				}
+			});
 
-								loginPage();
-
-								//printTable(json);
-							} else {
-								alert("fill the form");
-							}
-						} else {
-							if (position != undefined) {
-								json[position].firstName = $("#fName").val();
-								json[position].lastName = $("#lName").val();
-								printTable(json);
-							}
-						}
+			function validfName(name) {
+				if (!isValidName(name)) {
+					$("#fName").css({
+						"box-shadow": "0 0 4px rgb(158, 22, 4)",
+						"border": "1px solid #600"
 					});
+					$("#fName").focus();
+					$('#fName').val(" "); //clears the input box
+					$('#fnamefeed').text("enter at least two characters");
 
 
-					function validfName(name){
-						if(!isValidName(name)){
-							$("#fName").css({"box-shadow": "0 0 4px rgb(158, 22, 4)","border":"1px solid #600"});
-							$("#fName").focus();
-							$('#fName').val(" "); //clears the input box
-							$('#fnamefeed').text("enter at least two characters");
-							
-							
-							event.preventDefault();
-						}else{
-							$('#fnamefeed').text(" ");
-							
-						}
-					}
+					event.preventDefault();
+				} else {
+					$('#fnamefeed').text(" ");
 
-					function validlName(name){
-						if(!isValidName(name)){
-							$("#lName").css({"box-shadow": "0 0 4px rgb(158, 22, 4)","border":"1px solid #600"});
-							$("#lName").focus();
-							$('#lName').val(" "); //clears the input box
-							$('#lnamefeed').text("enter at least two characters");
-						
-							event.preventDefault();
-						}else{
-							$('#lnamefeed').text(" ");
-							
-						}
-					}
+				}
+			}
 
-					function isValidName(name){
-						return name.length>=2;
-					}		
+			function validlName(name) {
+				if (!isValidName(name)) {
+					$("#lName").css({
+						"box-shadow": "0 0 4px rgb(158, 22, 4)",
+						"border": "1px solid #600"
+					});
+					$("#lName").focus();
+					$('#lName').val(" "); //clears the input box
+					$('#lnamefeed').text("enter at least two characters");
 
-					function validEmail(email){
-						if(!isValidEmail(email)){
-							$("#email").css({"box-shadow": "0 0 4px rgb(158, 22, 4)","border":"1px solid #600"});
-							$("#email").focus();
-							$("#email").val(" "); //clears the input box
-							
-							
-							$('#emailfeed').text("email should be in ___@__.__ form ");
-							
-							event.preventDefault();
+					event.preventDefault();
+				} else {
+					$('#lnamefeed').text(" ");
 
-						}else{
-							$('#emailfeed').text(" ");
-							
-						}
-					}		
+				}
+			}
+
+			function isValidName(name) {
+				return name.length >= 2;
+			}
+
+			function validEmail(email) {
+				if (!isValidEmail(email)) {
+					$("#email").css({
+						"box-shadow": "0 0 4px rgb(158, 22, 4)",
+						"border": "1px solid #600"
+					});
+					$("#email").focus();
+					$("#email").val(" "); //clears the input box
 
 
-					function isValidEmail(email){
-						return /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email);
-					}	
-						
-						
-					function validPass(password){
-						if(!isValidPassword(password)){
-							$("#password").css({"box-shadow": "0 0 4px rgb(158, 22, 4)","border":"1px solid #600"});							$('#pasfeed').text("password should be alphanumeric and have atleast six characters ");
-							$('#password').val("");
-							$("#password").focus();
-							
-							event.preventDefault();
-						}else{
-							$('#pasfeed').text(" ");
-							
-						}
-					}		
+					$('#emailfeed').text("email should be in ___@__.__ form ");
+
+					event.preventDefault();
+				} else {
+					$('#emailfeed').text(" ");
+
+				}
+			}
+
+			function isValidEmail(email) {
+				return /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email);
+			}
 
 
-					function isValidPassword(password){
-						return password.length>=6 && /.*[0-9].*/.test(password);
-					}	
+			function validPass(password) {
+				if (!isValidPassword(password)) {
+					$("#password").css({
+						"box-shadow": "0 0 4px rgb(158, 22, 4)",
+						"border": "1px solid #600"
+					});
+					$('#pasfeed').text("password should be alphanumeric and have atleast six characters ");
+					$('#password').val("");
+					$("#password").focus();
+
+					event.preventDefault();
+				} else {
+					$('#pasfeed').text(" ");
+
+				}
+			}
+
+			function isValidPassword(password) {
+				return password.length >= 6 && /.*[0-9].*/.test(password);
+			}
 
 
+			function storeData(json) {
+				var data = JSON.stringify(json);
+				return data;
+			}
 
-	
-					
+			//console.log(myData);
 
-					function storeData(json) {
-						var data = JSON.stringify(json);
-						return data;
-					}
-
-					 
-
-					//console.log(myData);
-
-					 
-
-
-					function loginPage(){
-						window.open("loginTitan.html",'_blank');
-					}
-
-
-
-
-					    //return JSON.parse(localStorage.getItem(key));
-
-
-					// 	// $("#search").on("keyup", function () {
-					// 	// 	var value = $(this).val();
-
-					// 	// 	$("table tr").each(function (index) {
-					// 	// 		if (index !== 0) {
-
-					// 	// 			$row = $(this);
-
-					// 	// 			var id = $row.find("td:first").text();
-
-					// 	// 			if (id.indexOf(value) !== 0) {
-					// 	// 				$row.hide();
-					// 	// 			}
-					// 	// 			else {
-					// 	// 				$row.show();
-					// 	// 			}
-					// 	// 		}
-					// 	// 	});
-					// 	// });
-					// 	// 	});
-
-					// function printTable(json) {
-					// 	var htmlData = "<table id = 'named'>";
-					// 	htmlData +=
-					// 		"<tr><th onclick='sortTable(0)'>First Name</th><th onclick='sortTable(1)'>Last Name</th></tr>";
-					// 	for (var i = 0; i < json.length; i++) {
-					// 		htmlData +=
-					// 			`<tr><td>${json[i].firstName}</td><td>${json[i].lastName}</td></tr>`;
-					// 	}
-					// 	htmlData += "</table>";
-					// 	$("#tableElement").html("");
-					// 	$("#tableElement").append(htmlData);
-					// }
-
-					// function editJson(pos) {
-					// 	editClick = true;
-					// 	position = pos;
-					// 	$("#fName").val('');
-					// 	$("#lName").val('');
-					// 	//console.log(pos);
-					// 	$("#fName").val(json[pos].firstName);
-					// 	$("#lName").val(json[pos].lastName);
-					// }
-
-					// function deleteJson(pos) {
-					// 	json.splice(pos, 1);
-					// 	printTable(json);
-					// }
-
-					// function sortTable(n) {
-					// 	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-					// 	table = document.getElementById("named");
-					// 	switching = true;
-					// 	//Set the sorting direction to ascending:
-					// 	dir = "asc";
-					// 	/*Make a loop that will continue until
-					// 	no switching has been done:*/
-					// 	while (switching) {
-					// 		//start by saying: no switching is done:
-					// 		switching = false;
-					// 		rows = table.rows;
-					// 		/*Loop through all table rows (except the
-					// 		first, which contains table headers):*/
-					// 		for (i = 1; i < (rows.length - 1); i++) {
-					// 			//start by saying there should be no switching:
-					// 			shouldSwitch = false;
-					// 			/*Get the two elements you want to compare,
-					// 			one from current row and one from the next:*/
-					// 			x = rows[i].getElementsByTagName("TD")[n];
-					// 			y = rows[i + 1].getElementsByTagName("TD")[n];
-					// 			/*check if the two rows should switch place,
-					// 			based on the direction, asc or desc:*/
-					// 			if (dir == "asc") {
-					// 				if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-					// 					//if so, mark as a switch and break the loop:
-					// 					shouldSwitch = true;
-					// 					break;
-					// 				}
-					// 			} else if (dir == "desc") {
-					// 				if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-					// 					//if so, mark as a switch and break the loop:
-					// 					shouldSwitch = true;
-					// 					break;
-					// 				}
-					// 			}
-					// 		}
-					// 		if (shouldSwitch) {
-					// 			/*If a switch has been marked, make the switch
-					// 			and mark that a switch has been done:*/
-					// 			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-					// 			switching = true;
-					// 			//Each time a switch is done, increase this count by 1:
-					// 			switchcount++;
-					// 		} else {
-					// 			/*If no switching has been done AND the direction is "asc",
-					// 			set the direction to "desc" and run the while loop again.*/
-					// 			if (switchcount == 0 && dir == "asc") {
-					// 				dir = "desc";
-					// 				switching = true;
-					// 			}
-					// 		}
-					// 	}
-				 });
+			function loginPage() {
+				window.open("loginTitan.html", '_blank');
+			}
+			//return JSON.parse(localStorage.getItem(key));
+			// 	// $("#search").on("keyup", function () {
+			// 	// 	var value = $(this).val();
+			// 	// 	$("table tr").each(function (index) {
+			// 	// 		if (index !== 0) {
+			// 	// 			$row = $(this);
+			// 	// 			var id = $row.find("td:first").text();
+			// 	// 			if (id.indexOf(value) !== 0) {
+			// 	// 				$row.hide();
+			// 	// 			}
+			// 	// 			else {
+			// 	// 				$row.show();
+			// 	// 			}
+			// 	// 		}
+			// 	// 	});
+			// 	// });
+			// 	// 	});
+			// function printTable(json) {
+			// 	var htmlData = "<table id = 'named'>";
+			// 	htmlData +=
+			// 		"<tr><th onclick='sortTable(0)'>First Name</th><th onclick='sortTable(1)'>Last Name</th></tr>";
+			// 	for (var i = 0; i < json.length; i++) {
+			// 		htmlData +=
+			// 			`<tr><td>${json[i].firstName}</td><td>${json[i].lastName}</td></tr>`;
+			// 	}
+			// 	htmlData += "</table>";
+			// 	$("#tableElement").html("");
+			// 	$("#tableElement").append(htmlData);
+			// }
+			// function editJson(pos) {
+			// 	editClick = true;
+			// 	position = pos;
+			// 	$("#fName").val('');
+			// 	$("#lName").val('');
+			// 	//console.log(pos);
+			// 	$("#fName").val(json[pos].firstName);
+			// 	$("#lName").val(json[pos].lastName);
+			// }
+			// function deleteJson(pos) {
+			// 	json.splice(pos, 1);
+			// 	printTable(json);
+			// }
+			// function sortTable(n) {
+			// 	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+			// 	table = document.getElementById("named");
+			// 	switching = true;
+			// 	//Set the sorting direction to ascending:
+			// 	dir = "asc";
+			// 	/*Make a loop that will continue until
+			// 	no switching has been done:*/
+			// 	while (switching) {
+			// 		//start by saying: no switching is done:
+			// 		switching = false;
+			// 		rows = table.rows;
+			// 		/*Loop through all table rows (except the
+			// 		first, which contains table headers):*/
+			// 		for (i = 1; i < (rows.length - 1); i++) {
+			// 			//start by saying there should be no switching:
+			// 			shouldSwitch = false;
+			// 			/*Get the two elements you want to compare,
+			// 			one from current row and one from the next:*/
+			// 			x = rows[i].getElementsByTagName("TD")[n];
+			// 			y = rows[i + 1].getElementsByTagName("TD")[n];
+			// 			/*check if the two rows should switch place,
+			// 			based on the direction, asc or desc:*/
+			// 			if (dir == "asc") {
+			// 				if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+			// 					//if so, mark as a switch and break the loop:
+			// 					shouldSwitch = true;
+			// 					break;
+			// 				}
+			// 			} else if (dir == "desc") {
+			// 				if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+			// 					//if so, mark as a switch and break the loop:
+			// 					shouldSwitch = true;
+			// 					break;
+			// 				}
+			// 			}
+			// 		}
+			// 		if (shouldSwitch) {
+			// 			/*If a switch has been marked, make the switch
+			// 			and mark that a switch has been done:*/
+			// 			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			// 			switching = true;
+			// 			//Each time a switch is done, increase this count by 1:
+			// 			switchcount++;
+			// 		} else {
+			// 			/*If no switching has been done AND the direction is "asc",
+			// 			set the direction to "desc" and run the while loop again.*/
+			// 			if (switchcount == 0 && dir == "asc") {
+			// 				dir = "desc";
+			// 				switching = true;
+			// 			}
+			// 		}
+			// 	}
+		});
 	</script>
 </head>
 
@@ -375,15 +369,25 @@
 		<input type="text" name="" id="lName" required placeholder="Last name" />
 		<span id="lnamefeed"></span>
 		<br>
-		<input type="email" name="" id="email" required placeholder="email" /> 
+		<input type="email" name="" id="email" required placeholder="email" />
 		<span id="emailfeed"></span>
 		<br>
-		<input type="password" name="" id="password" placeholder="Password" /> 
+		<input type="password" name="" id="password" placeholder="Password" />
 		<span id="pasfeed"></span>
 		<br>
+		<input type="number" name="" placeholder="Contact No" id="phno"><br>
+
+		<input type="date" name="" id="dob"><br>
 
 
-		<input type="button" name="" value="Submit" id="btnSubmit">
+
+		<input type="button" name="" value="Register" id="btnSubmit">
+		<img id="success"></img>
+		<!-- <input type="button" name="" value="Login" id="login"> -->
+		<br>
+		<br>
+
+		<span id="span"> Already registered?? <a href="loginTitan.html" target="blank">Login here</a></span>
 
 
 	</form>
